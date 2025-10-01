@@ -2,8 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
-       static ArrayList<Livro> livros;
-       static ArrayList<Usuario> users;
+       static ArrayList<Livro> livros = new ArrayList<>();
+       static ArrayList<Usuario> users = new ArrayList<>();
+
+
 
     public static void adicionarLivro(Livro livro){
         livros.add(livro);
@@ -14,7 +16,7 @@ public class Biblioteca {
     public static void adicionarUsuarioAlu(Usuario usuario){
         users.add(usuario);
     }
-    public static void emprestarLivro(int id, int codigo){
+    public static void emprestarLivro(int codigo){
         for (Livro livro : livros){
             if (livro.getCodigo() == codigo){
                 if(livro.isStatus() == true){

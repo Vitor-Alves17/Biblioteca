@@ -8,8 +8,25 @@ public class Main {
 
         int ver = 0;
         int opcao = 0;
-
-
+        int user = 0;
+        int livro = 0;
+        int certo = 0;
+        int certo2 = 0;
+        String nometitulo = "";
+        String autor = "";
+        String email = "";
+        //dados mocados:
+        Biblioteca.adicionarLivro(new Livro(1,"Cinquenta tons de cinza", "Jaqueline", true));
+        Biblioteca.adicionarLivro(new Livro(2,"Crepusculo", "Jeniffer", true));
+        Biblioteca.adicionarLivro(new Livro(3,"Harry Potter", "JK Rolling", true));
+        Biblioteca.adicionarLivro(new Livro(4,"Veradades dificeis de ouvir", "Josephine", true));
+        Biblioteca.adicionarLivro(new Livro(5,"Café com Deus Pai", "João", true));
+        Biblioteca.adicionarUsuarioAlu(new Aluno(1, "Lucas", "lucasn@gmail.com"));
+        Biblioteca.adicionarUsuarioAlu(new Aluno(2, "Lyan", "lyaozinhocabritinho@gmail.com"));
+        Biblioteca.adicionarUsuarioAlu(new Aluno(3, "Nathalia", "estolionathalia@gmail.com"));
+        Biblioteca.adicionarUsuarioAlu(new Professor(4, "Fiama", "fiama@gmail.com"));
+        Biblioteca.adicionarUsuarioAlu(new Professor(5, "Lucas", "lucaslima@gmail.com"));
+        Biblioteca.adicionarUsuarioAlu(new Professor(6, "Gal", "galdiback@gmail.com"));
 
         do{
             System.out.println("""
@@ -55,6 +72,28 @@ public class Main {
                     }while(opcao != 0);
                     break;
                     case 3:
+                        System.out.println("Qual livro deseja emprestar?: ");
+                        livro = sc.nextInt();
+                        System.out.println("Id do usuario para qual deseja emprestar: ");
+                        user = sc.nextInt();
+                        for (Livro livros: Biblioteca.livros){
+                            certo++;
+                            if (livros.getCodigo() == livro){
+                                break;
+                            }
+                        }
+                        Biblioteca.emprestarLivro(certo);
+                        for (Usuario usuarios : Biblioteca.users){
+                            certo2++;
+                            if (usuarios.getId() == user){
+                                break;
+                            }
+                        }
+                        Emprestimo.emprestimo(Biblioteca.users.get(certo2-1), Biblioteca.livros.get(certo-1), "01/10/2025", "01/11/2015");
+                        certo = 0;
+                        certo2 = 0;
+                        break;
+                        case 4:
             }
 
         }while (ver != 0);

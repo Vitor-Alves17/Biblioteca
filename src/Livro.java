@@ -17,6 +17,7 @@ public class Livro implements Imprestavel{
         this.status = status;
     }
 
+
     @Override
     public void emprestar(){
         status = false;
@@ -56,5 +57,4 @@ public class Livro implements Imprestavel{
     public void setStatus(boolean status) {
         this.status = status;
     }
-
 }

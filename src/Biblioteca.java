@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Biblioteca {
        static ArrayList<Livro> livros = new ArrayList<>();
@@ -10,11 +11,11 @@ public class Biblioteca {
     public static void adicionarLivro(Livro livro){
         livros.add(livro);
     }
-    public static void adicionarUsuarioProf(Usuario usuario){
-        users.add(usuario);
+    public static void adicionarUsuarioProf(int idProfessor, String nome, String email, int numeroLivros){
+        users.add(new Professor(idProfessor, nome, email, numeroLivros));
     }
-    public static void adicionarUsuarioAlu(Usuario usuario){
-        users.add(usuario);
+    public static void adicionarUsuarioAlu(int idAluno, String nome, String email, int numeroLivros){
+        users.add(new Aluno(idAluno, nome, email, numeroLivros));
     }
     public static void emprestarLivro(int codigo){
         for (Livro livro : livros){

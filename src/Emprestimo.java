@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Emprestimo {
     static List<Emprestimo> emprestimos = new ArrayList<>();
+    private int idEmprestimo;
     private Usuario usuario;
     private Livro livro;
     private String dataEmprestimo;
@@ -11,13 +12,14 @@ public class Emprestimo {
 
 
 
-    public Emprestimo(Usuario usuario, Livro livro, String dataEmprestimo, String dataDevolucao) {
+    public Emprestimo(int idEmprestimo, Usuario usuario, Livro livro, String dataEmprestimo, String dataDevolucao) {
+        this.idEmprestimo = idEmprestimo;
         this.usuario = usuario;
         this.livro = livro;
     }
 
-    public static void emprestimo(Usuario usuario, Livro livro, String dataEmprestimo, String dataDevolucao ) {
-        emprestimos.add(new Emprestimo(usuario, livro, dataEmprestimo, dataDevolucao));
+    public static void emprestimo(int idEmprestimo,Usuario usuario, Livro livro, String dataEmprestimo, String dataDevolucao ) {
+        emprestimos.add(new Emprestimo(idEmprestimo, usuario, livro, dataEmprestimo, dataDevolucao));
     }
 
     public Usuario getUsuario() {

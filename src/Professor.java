@@ -2,8 +2,8 @@ import java.util.List;
 
 public class Professor extends Usuario{
 
-    public Professor(int id,String nome, String email) {
-        super(id, nome, email);
+    public Professor(int id,String nome, String email, int numeroLivros) {
+        super(id, nome, email,  numeroLivros);
     }
 
     public Professor() {

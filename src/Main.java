@@ -3,8 +3,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Usuario prof = new Professor();
-        Usuario aluno = new Aluno();
+
+
+
 
         int ver = 0;
         int opcao = 0;
@@ -12,6 +13,7 @@ public class Main {
         int livro = 0;
         int certo = 0;
         int certo2 = 0;
+        int idEmprestimo = 0;
         String nometitulo = "";
         String autor = "";
         String email = "";
@@ -21,12 +23,12 @@ public class Main {
         Biblioteca.adicionarLivro(new Livro(3,"Harry Potter", "JK Rolling", true));
         Biblioteca.adicionarLivro(new Livro(4,"Veradades dificeis de ouvir", "Josephine", true));
         Biblioteca.adicionarLivro(new Livro(5,"Café com Deus Pai", "João", true));
-        Biblioteca.adicionarUsuarioAlu(new Aluno(1, "Lucas", "lucasn@gmail.com"));
-        Biblioteca.adicionarUsuarioAlu(new Aluno(2, "Lyan", "lyaozinhocabritinho@gmail.com"));
-        Biblioteca.adicionarUsuarioAlu(new Aluno(3, "Nathalia", "estolionathalia@gmail.com"));
-        Biblioteca.adicionarUsuarioAlu(new Professor(4, "Fiama", "fiama@gmail.com"));
-        Biblioteca.adicionarUsuarioAlu(new Professor(5, "Lucas", "lucaslima@gmail.com"));
-        Biblioteca.adicionarUsuarioAlu(new Professor(6, "Gal", "galdiback@gmail.com"));
+        Biblioteca.adicionarUsuarioAlu(1, "Lucas", "lucasn@gmail.com", 0);
+        Biblioteca.adicionarUsuarioAlu(2, "Lyan", "lyaozinhocabritinho@gmail.com", 0);
+        Biblioteca.adicionarUsuarioAlu(3, "Nathalia", "estolionathalia@gmail.com", 0);
+        Biblioteca.adicionarUsuarioProf(4, "Fiama", "fiama@gmail.com", 0);
+        Biblioteca.adicionarUsuarioProf(5, "Lucas", "lucaslima@gmail.com", 0);
+        Biblioteca.adicionarUsuarioProf(6, "Gal", "galdiback@gmail.com", 0);
 
         do{
             System.out.println("""
@@ -52,12 +54,12 @@ public class Main {
                     while (opcao != 1 && opcao != 2 && opcao != 0) {
                         System.out.println("Digito invalido, tente novamente");
                     }
-                    int id = 0;
+                    int id = 6;
                     do{
                     switch (opcao){
-                        case 1:Biblioteca.adicionarUsuarioProf(new Aluno(id++, sc.next(), sc.next()));
+                        case 1:Biblioteca.adicionarUsuarioProf(id++, sc.next(), sc.next(), 0);
                         break;
-                        case 2: Biblioteca.adicionarUsuarioAlu(new Professor(id++, sc.next(), sc.next()));
+                        case 2: Biblioteca.adicionarUsuarioAlu(id++, sc.next(), sc.next(), 0);
                     }
                         System.out.println("""
                                 Deseja adiconar outro Usuario?:
@@ -74,14 +76,17 @@ public class Main {
                     case 3:
                         System.out.println("Qual livro deseja emprestar?: ");
                         livro = sc.nextInt();
-                        System.out.println("Id do usuario para qual deseja emprestar: ");
-                        user = sc.nextInt();
                         for (Livro livros: Biblioteca.livros){
                             certo++;
                             if (livros.getCodigo() == livro){
                                 break;
                             }
                         }
+                        if (Biblioteca.livros.get(certo-1).isStatus() == false){
+                            System.out.println("Livro indisponivel");
+                        }else {
+                        System.out.println("Id do usuario para qual deseja emprestar: ");
+                        user = sc.nextInt();
                         Biblioteca.emprestarLivro(certo);
                         for (Usuario usuarios : Biblioteca.users){
                             certo2++;
@@ -89,11 +94,53 @@ public class Main {
                                 break;
                             }
                         }
-                        Emprestimo.emprestimo(Biblioteca.users.get(certo2-1), Biblioteca.livros.get(certo-1), "01/10/2025", "01/11/2015");
+                        if (Biblioteca.users.get(certo2-1).getNumeroLivros()+1 > Biblioteca.users.get(certo2-1).getLimiteEmprestimo()){
+                            System.out.println("Limite de emprestimos atingido para esse usuario. ");
+                        }else {
+                        Biblioteca.users.get(certo2-1).addEmprest();
+                        Emprestimo.emprestimo(idEmprestimo++,Biblioteca.users.get(certo2-1), Biblioteca.livros.get(certo-1), "01/10/2025", "01/11/2015");
+                        System.out.printf(""" 
+                                Emprestimo feito com sucesso!
+                                Livro: %s
+                                Codigo do livro: %d
+                                Usuario: %s
+                                Id do usuario: %d
+                                Data do emprestimo: %s
+                                Data de devolução: %s
+                                """, Biblioteca.livros.get(certo-1).getTitulo(),Biblioteca.livros.get(certo-1).getCodigo(), Biblioteca.users.get(certo2-1).getNome(),Biblioteca.users.get(certo2-1).getId(), "01/10/2025", "01/11/2015");
+                        }
+                        }
                         certo = 0;
                         certo2 = 0;
                         break;
                         case 4:
+                            System.out.println("Qual livro deseja devolver?: ");
+                            livro = sc.nextInt();
+                            System.out.println("Id do usuario para qual deseja devolver: ");
+                            user = sc.nextInt();
+                            for (Livro livros: Biblioteca.livros){
+                                certo++;
+                                if (livros.getCodigo() == livro){
+                                    break;
+                                }
+                            }
+                            for (Usuario usuarios : Biblioteca.users){
+                                certo2++;
+                                if (usuarios.getId() == user){
+                                    break;
+                                }
+                            }
+                            Biblioteca.devolverLivro(Biblioteca.users.get(certo2-1), certo-1);
+                            for (int i = 0; i < Emprestimo.emprestimos.size(); i++){
+                                if (Emprestimo.emprestimos.get(i).getLivro().getCodigo() == Biblioteca.livros.get(certo-1).getCodigo()){
+                                    idEmprestimo = i;
+                                    break;
+                                }
+                            }
+                            break;
+                            case 5:
+                                ver = 0;
+
             }
 
         }while (ver != 0);

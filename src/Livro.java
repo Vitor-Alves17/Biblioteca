@@ -57,4 +57,14 @@ public class Livro implements Imprestavel{
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Livro{" +
+                "codigo=" + codigo +
+                ", titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

@@ -36,6 +36,7 @@ public class Biblioteca {
                 } else  {
                     System.out.println("Livro já Disponivel");
                 }
+                Biblioteca.users.get(user.getId()).removeEmprest();
             }
         }
     }

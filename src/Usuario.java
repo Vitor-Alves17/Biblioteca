@@ -48,6 +48,9 @@ abstract class Usuario {
     public void addEmprest() {
         this.numeroLivros++;
     }
+    public void removeEmprest() {
+        this.numeroLivros--;
+    }
 
     @Override
     public String toString() {

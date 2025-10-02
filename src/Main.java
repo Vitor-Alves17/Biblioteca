@@ -136,7 +136,19 @@ public class Main {
                                     idEmprestimo = i;
                                     break;
                                 }
+                                Emprestimo.emprestimos.remove(idEmprestimo);
+                                System.out.printf(""" 
+                                Devolução feita com sucesso!
+                                Livro: %s
+                                Codigo do livro: %d
+                                Usuario: %s
+                                Id do usuario: %d
+                                Data do emprestimo: %s
+                                Data de devolução: %s
+                                """, Biblioteca.livros.get(certo-1).getTitulo(),Biblioteca.livros.get(certo-1).getCodigo(), Biblioteca.users.get(certo2-1).getNome(),Biblioteca.users.get(certo2-1).getId(), "01/10/2025", "01/11/2015");
                             }
+                            certo = 0;
+                            certo2 = 0;
                             break;
                             case 5:
                                 ver = 0;

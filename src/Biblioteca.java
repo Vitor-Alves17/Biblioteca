@@ -3,19 +3,25 @@ import java.util.List;
 import java.util.Objects;
 
 public class Biblioteca {
-       static ArrayList<Livro> livros = new ArrayList<>();
-       static ArrayList<Usuario> users = new ArrayList<>();
+       static List<Livro> livros = new ArrayList<>();
+       static List<Usuario> users = new ArrayList<>();
 
 
+    public static void lista(){
+        for (Usuario u : users) {
+
+            System.out.println(u.getId() + u.toString());
+        }
+    }
 
     public static void adicionarLivro(Livro livro){
         livros.add(livro);
     }
-    public static void adicionarUsuarioProf(int idProfessor, String nome, String email, int numeroLivros){
-        users.add(new Professor(idProfessor, nome, email, numeroLivros));
+    public static void adicionarUsuarioProf(Usuario u){
+        users.add(u);
     }
-    public static void adicionarUsuarioAlu(int idAluno, String nome, String email, int numeroLivros){
-        users.add(new Aluno(idAluno, nome, email, numeroLivros));
+    public static void adicionarUsuarioAlu(Usuario u){
+        users.add(u);
     }
     public static void emprestarLivro(int codigo){
         for (Livro livro : livros){

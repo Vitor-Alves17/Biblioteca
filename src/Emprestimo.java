@@ -10,7 +10,10 @@ public class Emprestimo {
     private String dataEmprestimo;
     private String dataDevolucao;
 
-
+    public Emprestimo( Livro livro, Usuario usuario) {
+        this.usuario = usuario;
+        this.livro = livro;
+    }
 
     public Emprestimo(int idEmprestimo, Usuario usuario, Livro livro, String dataEmprestimo, String dataDevolucao) {
         this.idEmprestimo = idEmprestimo;
@@ -18,6 +21,9 @@ public class Emprestimo {
         this.livro = livro;
     }
 
+    public static void empr(Emprestimo e) {
+        emprestimos.add(e);
+    }
     public static void emprestimo(int idEmprestimo,Usuario usuario, Livro livro, String dataEmprestimo, String dataDevolucao ) {
         emprestimos.add(new Emprestimo(idEmprestimo, usuario, livro, dataEmprestimo, dataDevolucao));
     }
@@ -52,5 +58,12 @@ public class Emprestimo {
 
     public void setDataDevolucao(String dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
+    }
+
+    @Override
+    public String toString() {
+        return "Emprestimo{" +
+                "usuario=" + usuario +
+                '}';
     }
 }

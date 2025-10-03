@@ -7,6 +7,10 @@ abstract class Usuario {
     private int numeroLivros;
 
     public Usuario(int id, String nome, String email,  int numeroLivros) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.numeroLivros = numeroLivros;
     }
     public Usuario(){
     }

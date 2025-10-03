@@ -23,12 +23,18 @@ public class Main {
         Biblioteca.adicionarLivro(new Livro(3,"Harry Potter", "JK Rolling", true));
         Biblioteca.adicionarLivro(new Livro(4,"Veradades dificeis de ouvir", "Josephine", true));
         Biblioteca.adicionarLivro(new Livro(5,"Café com Deus Pai", "João", true));
-        Biblioteca.adicionarUsuarioAlu(1, "Lucas", "lucasn@gmail.com", 0);
-        Biblioteca.adicionarUsuarioAlu(2, "Lyan", "lyaozinhocabritinho@gmail.com", 0);
-        Biblioteca.adicionarUsuarioAlu(3, "Nathalia", "estolionathalia@gmail.com", 0);
-        Biblioteca.adicionarUsuarioProf(4, "Fiama", "fiama@gmail.com", 0);
-        Biblioteca.adicionarUsuarioProf(5, "Lucas", "lucaslima@gmail.com", 0);
-        Biblioteca.adicionarUsuarioProf(6, "Gal", "galdiback@gmail.com", 0);
+        Biblioteca.adicionarUsuarioAlu(new Aluno(1, "Lucas", "lucas@gmail.com", 0));
+        Biblioteca.adicionarUsuarioAlu(new Aluno(2, "Lyan", "lyaozinhocabritinho@gmail.com", 0));
+        Biblioteca.adicionarUsuarioAlu(new Aluno(3, "Nathalia", "estolionathalia@gmail.com", 0));
+        Biblioteca.adicionarUsuarioProf(new Professor(4, "Lucas", "lucas@gmail.com", 0));
+        Biblioteca.adicionarUsuarioProf(new Professor(5, "Fiama", "fiama@gmail.com", 0));
+        Biblioteca.adicionarUsuarioProf(new Professor(6, "Gal", "Gal@gmail.com", 0));
+
+
+
+        Biblioteca.lista();
+        //Biblioteca.adicionarUsuarioProf(5, "Lucas", "lucaslima@gmail.com", 0);
+        //Biblioteca.adicionarUsuarioProf(6, "Gal", "galdiback@gmail.com", 0);
 
         do{
             System.out.println("""
@@ -57,9 +63,9 @@ public class Main {
                     int id = 6;
                     do{
                     switch (opcao){
-                        case 1:Biblioteca.adicionarUsuarioProf(id++, sc.next(), sc.next(), 0);
+                        case 1:Biblioteca.adicionarUsuarioProf(new Professor(id++, sc.next(), sc.next(), 0));
                         break;
-                        case 2: Biblioteca.adicionarUsuarioAlu(id++, sc.next(), sc.next(), 0);
+                        case 2: Biblioteca.adicionarUsuarioAlu(new Aluno(id++, sc.next(), sc.next(), 0));
                     }
                         System.out.println("""
                                 Deseja adiconar outro Usuario?:
@@ -99,7 +105,8 @@ public class Main {
                         }else {
                         Biblioteca.users.get(certo2-1).addEmprest();
                         Emprestimo.emprestimo(idEmprestimo++,Biblioteca.users.get(certo2-1), Biblioteca.livros.get(certo-1), "01/10/2025", "01/11/2015");
-                        System.out.printf(""" 
+                            Emprestimo.emprestimos.forEach(System.out::println);
+                            System.out.printf(""" 
                                 Emprestimo feito com sucesso!
                                 Livro: %s
                                 Codigo do livro: %d
